@@ -11,7 +11,7 @@ class Customer(models.Model):
 		return self.name
 
 class Product(models.Model):
-	name = models.CharField(max_length200)
+	name = models.CharField(max_length=200)
 	price = models.FloatField()
 	digital = models.BooleanField(default=False, null=True, blank=True)
 	#Image
@@ -20,7 +20,7 @@ class Product(models.Model):
 		return self.name
 
 class Order(models.Model):
-	customer = models.ForeignKeyField(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 	date_orderd = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False, null=True, blank=True)
 	transaction_id = models.CharField(max_length=200, null=True)
@@ -29,18 +29,18 @@ class Order(models.Model):
 		return str(self.id)
 
 class OderItem(models.Model):
-	product = models.ForeignKeyField(Product, on_delete=models.SET_NULL, null=True, blank=True)
-	order = models.ForeignKeyField(Order, on_delete=models.SET_NULL, null=True, blank=True)
+	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
 	quantity = models.IntegerField(default=0, null=True, blank=True)
 	date_added = models.DateTimeField(auto_now_add=True)
 
 class ShippingAddress(models.Model):
-	customer = models.ForeignKeyField(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-	order = models.ForeignKeyField(Order, on_delete=models.SET_NULL, null=True, blank=True)
-	address = models.CharField(max_length200)
-	city = models.CharField(max_length200)
-	state = models.CharField(max_length200)
-	zipcode = models.CharField(max_length200)
+	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
+	address = models.CharField(max_length=200)
+	city = models.CharField(max_length=200)
+	state = models.CharField(max_length=200)
+	zipcode = models.CharField(max_length=200)
 	date_added = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
